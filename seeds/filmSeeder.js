@@ -1,9 +1,9 @@
 exports.seed = function (knex) {
     // Deletes ALL existing entries
-    return knex('table_name').del()
+    return knex('film').del()
         .then(function () {
             // Inserts seed entries
-            return knex('table_name').insert([{
+            return knex('film').insert([{
                 title: 'The Rise of Demacia',
                 description: 'An epic tale of valor and justice, depicting the rise of the kingdom of Demacia and its champions.',
                 releaseYear: 2021,
