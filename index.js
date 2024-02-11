@@ -2,11 +2,11 @@ const amqp = require('amqplib/callback_api');
 const MailService = require("./service/mailService.js");
 require('dotenv').config();
 
-amqp.connect('amqp://localhost', function(error0, connection) {
+amqp.connect('amqp://localhost', function (error0, connection) {
     if (error0) {
         throw error0;
     }
-    connection.createChannel(function(error1, channel) {
+    connection.createChannel(function (error1, channel) {
         if (error1) {
             throw error1;
         }
@@ -19,12 +19,11 @@ amqp.connect('amqp://localhost', function(error0, connection) {
 
         console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
 
-        channel.consume(queue, function(msg) {
+        channel.consume(queue, function (msg) {
             const {type, id} = JSON.parse(msg.content.toString());
 
             let mailService = new MailService();
             console.log(`Received message: ${type}`);
-            console.log(`Received id: ${id}`);
 
             switch (type) {
                 case 'welcome':
@@ -35,6 +34,9 @@ amqp.connect('amqp://localhost', function(error0, connection) {
                     break;
                 case 'filmUpdated':
                     mailService.sendEmailFilmUpdated(id);
+                    break;
+                case 'filmCSV':
+                    mailService.sendEmailFilmCSV(id);
                     break;
                 default:
                     console.log(`Unknown email type: ${type}`);
