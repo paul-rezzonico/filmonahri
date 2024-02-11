@@ -2,7 +2,7 @@ const amqp = require('amqplib/callback_api');
 const MailService = require("./service/mailService.js");
 require('dotenv').config();
 
-amqp.connect('amqp://localhost', function (error0, connection) {
+amqp.connect('amqp://user:password@localhost', function (error0, connection) {
     if (error0) {
         throw error0;
     }
