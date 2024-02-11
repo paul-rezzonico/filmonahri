@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const knexConfig = require("../knexfile.js");
 const knex = require('knex')(knexConfig);
+const fs = require('fs');
+const fastcsv = require('fast-csv')
 
 class MailService {
     constructor() {
@@ -16,7 +18,7 @@ class MailService {
     }
 
     async sendWelcomeEmail(id) {
-        const user = await this.knex('user').where({ id }).first();
+        const user = await this.knex('user').where({id}).first();
         const message = {
             from: process.env.MAIL_USER,
             to: user.mail,
@@ -27,27 +29,64 @@ class MailService {
         return this.transporter.sendMail(message);
     }
 
-    async sendEmailNewFilm(user, film) {
-        const message = {
-            from: process.env.MAIL_USER,
-            to: user.mail,
-            subject: 'Nouveau film ajouté',
-            text: `Un nouveau film a été ajouté: ${film.title}`,
-        };
+    async sendEmailNewFilm(id) {
+        const users = await this.knex('user').select('mail');
+        const film = await this.knex('film').where({id}).first();
 
-        return this.transporter.sendMail(message);
+        users.forEach(user => {
+                const message = {
+                    from: process.env.MAIL_USER,
+                    to: user.mail,
+                    subject: 'Nouveau film',
+                    text: `Un nouveau film ${film.title} a été ajouté`,
+                };
+                this.transporter.sendMail(message);
+            }
+        );
     }
 
-    async sendEmailFilmUpdated(user, film) {
-        const message = {
-            from: process.env.MAIL_USER,
-            to: user.mail,
-            subject: 'Film modifié',
-            text: `Le film ${film.title} a été modifié`,
-        };
+    async sendEmailFilmUpdated(id) {
 
-        return this.transporter.sendMail(message);
+        const users = await this.knex('user').select('mail');
+        const film = await this.knex('film').where({id}).first();
+
+        users.forEach(user => {
+                const message = {
+                    from: process.env.MAIL_USER,
+                    to: user.mail,
+                    subject: 'Film modifié',
+                    text: `Le film ${film.title} a été modifié`,
+                };
+                this.transporter.sendMail(message);
+            }
+        );
     }
+
+    async sendEmailFilmCSV(id) {
+    const user = await this.knex('user').where({id}).first();
+    const films = await this.knex('film').select('*');
+
+    const ws = fs.createWriteStream('films.csv');
+    fastcsv
+        .write(films, { headers: true })
+        .on("end", () => {
+            const message = {
+                from: process.env.MAIL_USER,
+                to: user.mail,
+                subject: 'Export CSV',
+                text: 'Veuillez trouver en pièce jointe le fichier CSV des films',
+                attachments: [
+                    {
+                        filename: 'films.csv',
+                        path: './films.csv' // path to the file
+                    }
+                ]
+            };
+
+            this.transporter.sendMail(message);
+        })
+        .pipe(ws);
+}
 }
 
 module.exports = MailService;
