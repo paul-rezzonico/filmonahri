@@ -23,8 +23,8 @@ module.exports = class UserFavorite extends Model {
     }
 
     static get relationMappings() {
-        const Film = require('./Film');
-        const User = require('./User');
+        const Film = require('./film');
+        const User = require('./user');
 
         return {
             film: {
