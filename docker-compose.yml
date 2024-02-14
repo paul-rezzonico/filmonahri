@@ -28,12 +28,20 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app
+      - ./api:/app
     working_dir: /app
-    command: npm start
+    command: npm knex migrate:latest && npm start
     depends_on:
       - db
       - rabbitmq
 
   consumer:
-    image:
+    image: node:14
+    container_name: consumer
+    volumes:
+      - ./mailer-service:/app
+    working_dir: /app
+    command: npm start
+    depends_on:
+      - rabbitmq
+      
