@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 */node_modules
 */server/.env
-/.idea/
-=======
 /node_modules/
 .idea/
->>>>>>> temp_branch
