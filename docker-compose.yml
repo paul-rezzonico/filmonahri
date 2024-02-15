@@ -34,12 +34,13 @@ services:
       - rabbitmq
 
   consumer:
-    image: node:18
+    build: mailer-service/.
     container_name: consumer
     volumes:
       - ./mailer-service:/app
     working_dir: /app
     command: npm start
     depends_on:
+      - db
       - rabbitmq
       
