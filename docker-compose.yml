@@ -23,14 +23,12 @@ services:
       RABBITMQ_DEFAULT_USER: 'user'
       RABBITMQ_DEFAULT_PASS: 'password'
   api:
-    build: ./api
+    build: api/.
     container_name: api
     ports:
       - "3000:3000"
     volumes:
       - ./api:/app
-    working_dir: /app
-    command: npm install && npm knex migrate:latest && npm start
     depends_on:
       - db
       - rabbitmq
