@@ -29,7 +29,7 @@ DB_DATABASE=laravel
 
 4. you can run seeders to populate the database if you want, but DO IT BEFORE CALLING ANY POST ROUTE
 ```bash
-docker-compose exec app php artisan db:seed
+docker exec -it api npx knex seed:run
 ```
 
 5. you can access the project at http://localhost:3000/documentation
