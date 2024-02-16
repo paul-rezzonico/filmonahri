@@ -22,4 +22,4 @@ module.exports = {
 
         await knex.schema.dropTableIfExists('film');
     }
-}
+};
