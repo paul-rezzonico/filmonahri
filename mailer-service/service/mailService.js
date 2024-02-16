@@ -78,7 +78,7 @@ class MailService {
                 attachments: [
                     {
                         filename: 'films.csv',
-                        path: './films.csv' // path to the file
+                        path: './films.csv'
                     }
                 ]
             };
