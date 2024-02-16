@@ -38,7 +38,7 @@ class MailService {
                     from: process.env.MAIL_USER,
                     to: user.mail,
                     subject: 'Nouveau film',
-                    text: `Un nouveau film ${film.title} a été ajouté`,
+                    text: `Un nouveau film '${film.title}' a été ajouté`,
                 };
                 this.transporter.sendMail(message);
             }
@@ -47,15 +47,19 @@ class MailService {
 
     async sendEmailFilmUpdated(id) {
 
-        const users = await this.knex('user').select('mail');
+        const users = await this.knex('user')
+            .join('favorite', 'user.id', 'favorite.user_id')
+            .select('user.mail')
+            .where('favorite.film_id', id);
+
         const film = await this.knex('film').where({id}).first();
 
         users.forEach(user => {
                 const message = {
                     from: process.env.MAIL_USER,
                     to: user.mail,
-                    subject: 'Film modifié',
-                    text: `Le film ${film.title} a été modifié`,
+                    subject: 'Film mis à jour',
+                    text: `Le film '${film.title}' a été mis à jour`,
                 };
                 this.transporter.sendMail(message);
             }
