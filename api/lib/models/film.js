@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
-const {Model} = require('@hapipal/schwifty');
+const { Model } = require('@hapipal/schwifty');
 
 module.exports = class Film extends Model {
 
@@ -20,7 +20,7 @@ module.exports = class Film extends Model {
             length: Joi.number().integer().required().greater(0).example('125').description('Length of the film'),
             director: Joi.string().required().min(3).example('Ahri, the Nine-Tailed Fox').description('Director of the film'),
             createdAt: Joi.date(),
-            updatedAt: Joi.date(),
+            updatedAt: Joi.date()
         });
     }
 
@@ -34,4 +34,4 @@ module.exports = class Film extends Model {
         super.$beforeUpdate(opt, queryContext);
         this.updatedAt = new Date();
     }
-}
+};

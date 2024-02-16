@@ -1,6 +1,6 @@
 'use strict';
 
-const Joi = require('joi')
+const Joi = require('joi');
 const Boom = require('@hapi/boom');
 
 module.exports = [
@@ -22,7 +22,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService, mailService} = request.services();
+            const { userService, mailService } = request.services();
 
             const newUser = await userService.create(request.payload);
 
@@ -40,11 +40,11 @@ module.exports = [
             auth: {
                 scope: ['admin', 'user']
             },
-            tags: ['api'],
+            tags: ['api']
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             return await userService.findAll();
         }
@@ -65,7 +65,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             const user = await userService.findById(request.params.id);
 
@@ -88,7 +88,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             await userService.delete(request.params.id);
 
@@ -119,7 +119,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             const updatedUser = await userService.update(request.params.id, request.payload);
 
@@ -141,7 +141,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             const user = await userService.login(request.payload.mail, request.payload.password);
 
@@ -164,7 +164,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             const added = await userService.addFavorite(request.auth.credentials.id, request.payload.film_id);
 
@@ -191,7 +191,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             const removed = await userService.removeFavorite(request.auth.credentials.id, request.params.film_id);
 
@@ -209,13 +209,13 @@ module.exports = [
             auth: {
                 scope: ['user']
             },
-            tags: ['api'],
+            tags: ['api']
         },
         handler: async (request, h) => {
 
-            const {userService} = request.services();
+            const { userService } = request.services();
 
             return await userService.getFavorites(request.auth.credentials.id);
         }
-    },
+    }
 ];

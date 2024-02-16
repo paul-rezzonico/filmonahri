@@ -1,7 +1,7 @@
 'use strict';
 
 const Joi = require('joi');
-const {Model} = require('@hapipal/schwifty');
+const { Model } = require('@hapipal/schwifty');
 
 module.exports = class UserFavorite extends Model {
 
@@ -49,4 +49,4 @@ module.exports = class UserFavorite extends Model {
         super.$beforeUpdate(opt, queryContext);
         this.updatedAt = new Date();
     }
-}
+};

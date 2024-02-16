@@ -1,6 +1,6 @@
 'use strict';
 
-const {Service} = require('@hapipal/schmervice');
+const { Service } = require('@hapipal/schmervice');
 const Encrypt = require('@pahri/iut-encrypt');
 const Boom = require('@hapi/boom');
 const Jwt = require('@hapi/jwt');
@@ -9,21 +9,21 @@ module.exports = class UserService extends Service {
 
     async create(user) {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
         return User.query().insertAndFetch(user);
     }
 
     async findAll() {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
         return User.query();
     }
 
     async delete(id) {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
         const deletedRows = await User.query().deleteById(id);
 
@@ -36,7 +36,7 @@ module.exports = class UserService extends Service {
 
     async findById(id) {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
         const user = await User.query().findById(id);
 
@@ -49,16 +49,16 @@ module.exports = class UserService extends Service {
 
     async update(id, user) {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
         return User.query().findById(id).patch(user);
     }
 
     async findByEmail(email) {
 
-        const {User} = this.server.models();
+        const { User } = this.server.models();
 
-        const user = await User.query().findOne({mail: email});
+        const user = await User.query().findOne({ mail: email });
         if (!user) {
             throw Boom.notFound('User not found');
         }
@@ -67,7 +67,7 @@ module.exports = class UserService extends Service {
     }
 
     async validatePassword(password, user) {
-        return Encrypt.compareSha1(password, user.password)
+        return Encrypt.compareSha1(password, user.password);
     }
 
     async login(mail, password) {
@@ -89,25 +89,25 @@ module.exports = class UserService extends Service {
 
     async addFavorite(userId, filmId) {
 
-        const {UserFavorite} = this.server.models();
+        const { UserFavorite } = this.server.models();
 
-        const existing = await UserFavorite.query().findOne({user_id: userId, film_id: filmId});
+        const existing = await UserFavorite.query().findOne({ user_id: userId, film_id: filmId });
 
         if (existing) {
             return false;
         }
 
-        await UserFavorite.query().insert({user_id: userId, film_id: filmId});
+        await UserFavorite.query().insert({ user_id: userId, film_id: filmId });
 
         return true;
     }
 
     async removeFavorite(userId, filmId) {
-        const {UserFavorite} = this.server.models();
+        const { UserFavorite } = this.server.models();
 
         const rowsDeleted = await UserFavorite.query()
             .delete()
-            .where({user_id: userId, film_id: filmId});
+            .where({ user_id: userId, film_id: filmId });
 
         return rowsDeleted !== 0;
 
@@ -115,13 +115,14 @@ module.exports = class UserService extends Service {
 
 
     async getFavorites(userId) {
-        const {UserFavorite} = this.server.models();
+        const { UserFavorite } = this.server.models();
 
-        const favorites = await UserFavorite.query().where({user_id: userId}).withGraphFetched('film');
+        const favorites = await UserFavorite.query().where({ user_id: userId }).withGraphFetched('film');
 
         if (!favorites) {
             throw Boom.notFound('User not found');
         }
+
         return favorites.map((favorite) => favorite.film);
     }
 
@@ -133,11 +134,11 @@ module.exports = class UserService extends Service {
             test: 'test',
             id: user.id,
             mail: user.mail,
-            scope: user.role,
+            scope: user.role
         }, {
             key: 'm/JP1TflhqxQJTxj6C7Z5JrMiYuQk5YTe5ZYb292DC0=', algorithm: 'HS512'
         }, {
             ttlSec: 14400 // 4 hours
         });
     }
-}
+};

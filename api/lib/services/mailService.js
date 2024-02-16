@@ -3,17 +3,18 @@ const amqp = require('amqplib/callback_api');
 class MailService {
 
     async publishEmail(type, id) {
-        amqp.connect('amqp://user:password@rabbitmq', function (error0, connection) {
+        amqp.connect('amqp://user:password@rabbitmq', (error0, connection) => {
             if (error0) {
                 throw error0;
             }
-            connection.createChannel(function (error1, channel) {
+
+            connection.createChannel((error1, channel) => {
                 if (error1) {
                     throw error1;
                 }
 
                 const queue = 'mail';
-                const message = JSON.stringify({type, id});
+                const message = JSON.stringify({ type, id });
 
                 channel.assertQueue(queue, {
                     durable: false
