@@ -85,7 +85,7 @@ You need Docker to run the project, you can download it [here](https://www.docke
     docker-compose up -d
     ```
 
-4. OPTIONAL: you can run seeders to populate the database if you want, but DO IT BEFORE CALLING ANY POST ROUTE
+4. OPTIONAL: you can run seeders to populate the database if you want, but DO IT BEFORE CALLING ANY POST ROUTE AND WAIT FOR THE DATABASE TO BE UP
     ```bash
     docker exec -it api npx knex seed:run
     ```
@@ -98,6 +98,10 @@ You need Docker to run the project, you can download it [here](https://www.docke
     ```bash
     docker exec -it api npx knex migrate:latest
     ```
+if you change code and want to rebuild the project, you can run the following command
+>    ```bash
+>    docker-compose up -d --build
+>    ```
 
 ## Technologies Used
 
