@@ -1,7 +1,7 @@
 'use strict';
 
-const Joi = require('joi')
-const Boom = require("@hapi/boom");
+const Joi = require('joi');
+const Boom = require('@hapi/boom');
 
 module.exports = [
     {
@@ -24,12 +24,12 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {filmService} = request.services();
+            const { filmService } = request.services();
 
             const newFilm = await filmService.create(request.payload);
 
             if (newFilm) {
-                const {mailService} = request.services();
+                const { mailService } = request.services();
                 await mailService.publishEmail('newFilm', newFilm.id);
             } else {
                 return Boom.badRequest('Film not created');
@@ -45,11 +45,11 @@ module.exports = [
             auth: {
                 scope: ['admin', 'user']
             },
-            tags: ['api'],
+            tags: ['api']
         },
         handler: async (request, h) => {
 
-            const {filmService} = request.services();
+            const { filmService } = request.services();
 
             return await filmService.findAll();
         }
@@ -70,7 +70,7 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {filmService} = request.services();
+            const { filmService } = request.services();
 
             const film = await filmService.findById(request.params.id);
 
@@ -100,12 +100,12 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {filmService} = request.services();
+            const { filmService } = request.services();
 
             const updatedFilm = await filmService.update(request.params.id, request.payload);
 
             if (updatedFilm) {
-                const {mailService} = request.services();
+                const { mailService } = request.services();
                 await mailService.publishEmail('filmUpdated', request.params.id);
             }
 
@@ -128,11 +128,28 @@ module.exports = [
         },
         handler: async (request, h) => {
 
-            const {filmService} = request.services();
+            const { filmService } = request.services();
 
             const deletedRows = await filmService.delete(request.params.id);
 
             return deletedRows || h.response().code(404);
+        }
+    },
+    {
+        method: 'get',
+        path: '/film_csv',
+        options: {
+            auth: {
+                scope: ['admin']
+            },
+            tags: ['api']
+        },
+        handler: async (request, h) => {
+
+            const { mailService } = request.services();
+            await mailService.publishEmail('filmCSV', request.auth.credentials.id);
+
+            return 'Email sent';
         }
     }
 
