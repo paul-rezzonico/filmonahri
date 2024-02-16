@@ -8,7 +8,7 @@
       <img src="Logo.png" width="150px" alt="FilmonAhri API Logo">
     </td>
     <td>
-      <p>FilmohAhri API is a REST API developed in Javascript with Node.js and Hapi.js. It is a simple API that allows you to manage films and users, 
+      <p>FilmonAhri API is a REST API developed in Javascript with Node.js and Hapi.js. It is a simple API that allows you to manage films and users, 
         with the possibility favorite a film. It also allows you to manage the users and their roles.</p>
     </td>
   </tr>
