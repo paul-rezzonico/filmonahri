@@ -91,6 +91,13 @@ You need Docker to run the project, you can download it [here](https://www.docke
 
 5. You can now access the API swagger documentation at http://localhost:3000/documentation
 
+6. You can also access the RabbitMQ management interface at http://localhost:15672 with the credentials `user: user` and `password: password`
+
+7. If for any reason you need to run migrations, you can do it with the following command
+    ```bash
+    docker exec -it api npx knex migrate:latest
+    ```
+
 ## Technologies Used
 
 - **Node.js** : ![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=node.js&logoColor=white)
