@@ -70,14 +70,15 @@ You need Docker to run the project, you can download it [here](https://www.docke
     git clone https://github.com/paul-rezzonico/filmonahri.git
     ```
 
-2. > ⚠️ **Before running the project, you need to create a .env file in the `mailer-service` folder with the following content:**
+2. > ⚠️ **Before running the project, you need to complete the .env file located in the `mailer-service` folder with your own values**
     > ```bash
     > # .env
-    > MAIL_HOST=smtp.ethereal.email
-    > MAIL_PORT=587
+    > MAIL_HOST=your_host
+    > MAIL_PORT=your_port
     > MAIL_USER=your_email
     > MAIL_PASS=your_password
     > ```
+    > Exemple values are arleady set in the file, you just need to replace them with your own values
 
 3. run docker-compose
     ```bash
