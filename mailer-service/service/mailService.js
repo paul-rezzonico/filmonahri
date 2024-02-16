@@ -48,9 +48,11 @@ class MailService {
     async sendEmailFilmUpdated(id) {
 
         const users = await this.knex('user')
-            .join('favorite', 'user.id', 'favorite.user_id')
+            .join('user_favorites as favorite', 'user.id', 'favorite.user_id')
             .select('user.mail')
             .where('favorite.film_id', id);
+
+        console.log(users);
 
         const film = await this.knex('film').where({id}).first();
 
@@ -68,6 +70,9 @@ class MailService {
 
     async sendEmailFilmCSV(id) {
     const user = await this.knex('user').where({id}).first();
+    if (!user) {
+        return;
+    }
     const films = await this.knex('film').select('*');
 
     const ws = fs.createWriteStream('films.csv');
