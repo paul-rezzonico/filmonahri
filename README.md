@@ -9,7 +9,7 @@
     </td>
     <td>
       <p>FilmonAhri API is a REST API developed in Javascript with Node.js and Hapi.js. It is a simple API that allows you to manage films and users, 
-        with the possibility favorite a film. It also allows you to manage the users and their roles.</p>
+        with the possibility to favorite a film. It also allows you to manage the users and their roles.</p>
     </td>
   </tr>
 </table>
