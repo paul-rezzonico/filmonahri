@@ -1,7 +1,7 @@
 exports.seed = function (knex) {
     // Deletes ALL existing entries
     return knex('film').del()
-        .then(function () {
+        .then(() => {
             // Inserts seed entries
             return knex('film').insert([{
                 title: 'The Rise of Demacia',
@@ -10,7 +10,7 @@ exports.seed = function (knex) {
                 length: 130,
                 director: 'Jarvan Lightshield IV',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }, {
                 title: 'Shadows of Noxus',
                 description: 'A dark narrative that follows the ambitions of Noxus and its relentless leaders, Darius and Swain, as they expand their empire.',
@@ -18,7 +18,7 @@ exports.seed = function (knex) {
                 length: 145,
                 director: 'Darius the Hand of Noxus',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }, {
                 title: 'Piltover\'s Progress',
                 description: 'The story of innovation and conflict between the city of progress, Piltover, and its underground counterpart, Zaun.',
@@ -26,7 +26,7 @@ exports.seed = function (knex) {
                 length: 120,
                 director: 'Caitlyn the Sheriff of Piltover',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }, {
                 title: 'Tales of the Black Mist',
                 description: 'Unravel the mysteries of the Shadow Isles, following Yorick and other champions as they face the horrors of the harrowing mist.',
@@ -34,7 +34,7 @@ exports.seed = function (knex) {
                 length: 140,
                 director: 'Yorick, the Shepherd of Souls',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }, {
                 title: 'The Rogue Assassin',
                 description: 'A dramatic tale of vengeance and betrayal, featuring the rogue assassin Akali.',
@@ -42,7 +42,7 @@ exports.seed = function (knex) {
                 length: 135,
                 director: 'Akali, the Rogue Assassin',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }, {
                 title: 'Ahri, the Nine-Tailed Fox',
                 description: 'A tale of loss and betrayal, starring the vastaya fox spirit Ahri.',
@@ -50,7 +50,7 @@ exports.seed = function (knex) {
                 length: 125,
                 director: 'Ahri, the Nine-Tailed Fox',
                 createdAt: new Date(),
-                updatedAt: new Date(),
+                updatedAt: new Date()
             }]);
         });
 };

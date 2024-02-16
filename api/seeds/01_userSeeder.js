@@ -1,8 +1,9 @@
 const hasher = require('@pahri/iut-encrypt');
+
 exports.seed = function (knex) {
     // Deletes ALL existing entries
     return knex('user').del()
-        .then(function () {
+        .then(() => {
             // Inserts seed entries
             return knex('user').insert([{
                 firstName: 'Ahri',
@@ -58,6 +59,6 @@ exports.seed = function (knex) {
                 createdAt: new Date(),
                 updatedAt: new Date(),
                 role: 'user'
-            },]);
+            }]);
         });
 };

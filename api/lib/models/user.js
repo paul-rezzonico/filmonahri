@@ -22,7 +22,7 @@ module.exports = class User extends Model {
             password: Joi.string().min(8).example('password123').description('Password of the user'),
             createdAt: Joi.date(),
             updatedAt: Joi.date(),
-            role: Joi.string().default('user').example('user').description('Role of the user'),
+            role: Joi.string().default('user').example('user').description('Role of the user')
         });
     }
 
@@ -43,6 +43,7 @@ module.exports = class User extends Model {
         if (this.password) {
             this.encryptPassword();
         }
+
         this.updatedAt = new Date();
     }
 
