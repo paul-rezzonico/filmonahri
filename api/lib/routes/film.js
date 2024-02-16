@@ -31,7 +31,8 @@ module.exports = [
             if (newFilm) {
                 const { mailService } = request.services();
                 await mailService.publishEmail('newFilm', newFilm.id);
-            } else {
+            }
+            else {
                 return Boom.badRequest('Film not created');
             }
 
