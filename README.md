@@ -78,7 +78,7 @@ You need Docker to run the project, you can download it [here](https://www.docke
     > MAIL_USER=your_email
     > MAIL_PASS=your_password
     > ```
-    > Exemple values are arleady set in the file, you just need to replace them with your own values
+    > Exemple values are already set in the file, you just need to replace them with your own values
 
 3. run docker-compose
     ```bash
