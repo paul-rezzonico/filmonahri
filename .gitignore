@@ -1,6 +1,4 @@
 */node_modules
-*/server/.env
-/node_modules/
+*/.env
 .idea/
-mailer-service/.env
-mailer-service/films.csv
+*/films.csv
