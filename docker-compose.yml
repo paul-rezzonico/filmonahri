@@ -1,7 +1,6 @@
-version: '3.8'
 services:
   db:
-    image: mysql:8
+    image: mysql:latest
     container_name: hapi-mysql
     ports:
       - "3306:3306"
@@ -10,7 +9,6 @@ services:
       MYSQL_DATABASE: user
     volumes:
       - ./mysql-init:/docker-entrypoint-initdb.d
-    command: --default-authentication-plugin=mysql_native_password
 
   rabbitmq:
     image: rabbitmq:3-management
