@@ -29,7 +29,7 @@ services:
     volumes:
       - ./api:/app
       - /app/node_modules
-    command: dockerize -wait tcp://db:3306 -timeout 60s npm start
+    command: dockerize -wait tcp://db:3306 -timeout 120s npm start
     depends_on:
       - db
       - rabbitmq
@@ -40,7 +40,7 @@ services:
     volumes:
       - ./mailer-service:/app
       - /app/node_modules
-    command: dockerize -wait tcp://db:3306 -timeout 60s npm start
+    command: dockerize -wait tcp://db:3306 -timeout 120s npm start
     depends_on:
       - db
       - rabbitmq
