@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 const { Model } = require('@hapipal/schwifty');
-const Encrypt = require('@pahri/iut-encrypt');
+const Encrypt = require('bcrypt');
 
 module.exports = class User extends Model {
 
@@ -49,7 +49,7 @@ module.exports = class User extends Model {
 
     encryptPassword() {
         if (this.password) {
-            this.password = Encrypt.sha1(this.password);
+            this.password = Encrypt.hashSync(this.password);
         }
     }
 

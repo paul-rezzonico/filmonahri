@@ -1,16 +1,14 @@
 'use strict';
 
 const { Service } = require('@hapipal/schmervice');
-const Encrypt = require('@pahri/iut-encrypt');
+const Encrypt = require('bcrypt');
 const Boom = require('@hapi/boom');
 const Jwt = require('@hapi/jwt');
 
 module.exports = class UserService extends Service {
 
     async create(user) {
-
         const { User } = this.server.models();
-
         return User.query().insertAndFetch(user);
     }
 
@@ -67,7 +65,7 @@ module.exports = class UserService extends Service {
     }
 
     async validatePassword(password, user) {
-        return Encrypt.compareSha1(password, user.password);
+        return Encrypt.compareSync(password, user.password);
     }
 
     async login(mail, password) {
