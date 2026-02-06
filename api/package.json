@@ -51,5 +51,9 @@
     "eslint": "7.x.x",
     "hapi-swagger": "14.x.x",
     "knex": "^3.1.0"
+  },
+  "overrides": {
+    "marked": "^4.0.10",
+    "tar": "^7.5.7"
   }
 }
