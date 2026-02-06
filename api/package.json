@@ -20,14 +20,14 @@
     "@hapipal/haute-couture": "4.x.x",
     "@hapipal/schmervice": "^3.0.0",
     "@hapipal/schwifty": "6.x.x",
-    "@pahri/iut-encrypt": "^4.0.1",
     "amqplib": "^0.10.3",
+    "bcrypt": "^6.0.0",
     "exiting": "6.0.1",
     "joi": "17.x.x",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.9.8",
+    "nodemailer": "^7.0.12",
     "objection": "^3.0.0",
-    "sqlite3": "5.1.5"
+    "sqlite3": "^5.0.2"
   },
   "peerDependencies": {
     "knex": "0.21.x"
